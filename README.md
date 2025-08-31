@@ -86,6 +86,36 @@ npx agent-rules --init
 
 **📖 See [CLI_GUIDE.md](./CLI_GUIDE.md) for comprehensive CLI documentation and examples.**
 
+### Use in package.json scripts
+
+Add `agent-rules` to your `package.json` scripts for easy, repeatable runs:
+
+```json
+{
+  "scripts": {
+    "rules": "agent-rules",
+    "rules:dry": "agent-rules --dry-run --verbose",
+    "rules:cursor": "agent-rules --providers cursor",
+    "rules:custom": "agent-rules --provider ./tools/my-provider.js --no-builtin",
+    "rules:ci": "agent-rules --quiet"
+  }
+}
+```
+
+Then run with:
+
+```bash
+npm run rules          # generate all built-in outputs
+npm run rules:dry      # preview without writing files
+npm run rules:cursor   # only the Cursor provider
+npm run rules:custom   # only your custom provider
+```
+
+Notes:
+
+- If installed as a dependency (via the Installation section), `agent-rules` is available to scripts from `node_modules/.bin`.
+- Adjust `--input`, `--filter`, or `--config` to match your project (defaults: `--input agent-rules`, `--filter "*.md"`).
+
 ## Default Output
 
 This processes all `.md` files in `agent-rules/` and generates:
