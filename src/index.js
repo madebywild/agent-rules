@@ -92,7 +92,7 @@ export async function buildRules({ providers, inputDir, filePattern, dryRun, ver
 
     // Filter providers based on rule metadata
     const filteredProviders = filterProvidersForRule(providers, frontMatter);
-    
+
     // Clean front matter to remove processing directives
     const cleanedFrontMatter = cleanFrontMatter(frontMatter);
 
@@ -138,7 +138,7 @@ async function main() {
 
     // Handle special commands first
     if (options.listProviders) {
-      const builtinProviders = await getBuiltinProviders();
+      const builtinProviders = await getBuiltinProviders(finalOptions.output);
       listProviders(builtinProviders);
       return;
     }
@@ -159,6 +159,14 @@ async function main() {
     if (options.config) {
       const configOptions = await loadConfig(options.config);
       finalOptions = { ...configOptions, ...options }; // CLI options override config
+    }
+
+    // Warn when using custom output directory (intended for tests/CI only)
+    if (finalOptions.output) {
+      const resolved = path.resolve(finalOptions.output);
+      console.warn(
+        `⚠️  --output is intended for tests/CI cleanup only. Writing all provider artifacts under: ${resolved}`,
+      );
     }
 
     // Load providers based on options

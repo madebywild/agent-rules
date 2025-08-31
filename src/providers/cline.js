@@ -9,6 +9,12 @@ import { clearDir, ensureDir } from "../utils.js";
  */
 export class ClineProvider {
   /**
+   * @param {string | undefined} baseOutputDir - Optional base directory to contain provider outputs
+   */
+  constructor(baseOutputDir) {
+    this.#outDir = path.resolve(baseOutputDir ?? ".", ".clinerules");
+  }
+  /**
    * @readonly
    * @type {string}
    */
@@ -18,7 +24,7 @@ export class ClineProvider {
    * @private
    * @type {string}
    */
-  #outDir = path.resolve(".clinerules");
+  #outDir;
 
   /**
    * Prepare output directory, clear old artifacts

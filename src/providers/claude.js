@@ -8,6 +8,12 @@ import fs from "node:fs/promises";
  */
 export class ClaudeProvider {
   /**
+   * @param {string | undefined} baseOutputDir - Optional base directory to contain provider outputs
+   */
+  constructor(baseOutputDir) {
+    this.#outFile = path.resolve(baseOutputDir ?? ".", "CLAUDE.md");
+  }
+  /**
    * @readonly
    * @type {string}
    */
@@ -17,7 +23,7 @@ export class ClaudeProvider {
    * @private
    * @type {string}
    */
-  #outFile = path.resolve("CLAUDE.md");
+  #outFile;
 
   /**
    * @private

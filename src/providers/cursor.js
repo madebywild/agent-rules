@@ -10,6 +10,12 @@ import { clearDir, ensureDir } from "../utils.js";
  */
 export class CursorProvider {
   /**
+   * @param {string | undefined} baseOutputDir - Optional base directory to contain provider outputs
+   */
+  constructor(baseOutputDir) {
+    this.#outDir = path.resolve(baseOutputDir ?? ".", ".cursor/rules");
+  }
+  /**
    * @readonly
    * @type {string}
    */
@@ -19,7 +25,7 @@ export class CursorProvider {
    * @private
    * @type {string}
    */
-  #outDir = path.resolve(".cursor/rules");
+  #outDir;
 
   /**
    * Prepare output directory, clear old artifacts

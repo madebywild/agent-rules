@@ -110,13 +110,18 @@ export async function loadCustomProvider(providerPath) {
  * Get all built-in providers
  * @returns {Promise<import("./types.js").RuleProvider[]>} Array of built-in provider instances
  */
-export async function getBuiltinProviders() {
+export async function getBuiltinProviders(baseOutputDir) {
   const { CursorProvider } = await import("./providers/cursor.js");
   const { ClineProvider } = await import("./providers/cline.js");
   const { ClaudeProvider } = await import("./providers/claude.js");
   const { CopilotProvider } = await import("./providers/copilot.js");
 
-  return [new CursorProvider(), new ClineProvider(), new ClaudeProvider(), new CopilotProvider()];
+  return [
+    new CursorProvider(baseOutputDir),
+    new ClineProvider(baseOutputDir),
+    new ClaudeProvider(baseOutputDir),
+    new CopilotProvider(baseOutputDir),
+  ];
 }
 
 /**
@@ -151,7 +156,7 @@ export async function loadProviders(options) {
 
   // Load built-in providers (unless --no-builtin which sets builtin to false)
   if (options.builtin !== false) {
-    const builtinProviders = await getBuiltinProviders();
+    const builtinProviders = await getBuiltinProviders(options.output);
 
     // Filter by specific provider IDs if specified
     if (options.providers && options.providers.length > 0) {

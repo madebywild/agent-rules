@@ -10,6 +10,12 @@ import { ensureDir } from "../utils.js";
  */
 export class CopilotProvider {
   /**
+   * @param {string | undefined} baseOutputDir - Optional base directory to contain provider outputs
+   */
+  constructor(baseOutputDir) {
+    this.#outFile = path.resolve(baseOutputDir ?? ".", ".github/copilot-instructions.md");
+  }
+  /**
    * @readonly
    * @type {string}
    */
@@ -19,7 +25,7 @@ export class CopilotProvider {
    * @private
    * @type {string}
    */
-  #outFile = path.resolve(".github/copilot-instructions.md");
+  #outFile;
 
   /**
    * @private

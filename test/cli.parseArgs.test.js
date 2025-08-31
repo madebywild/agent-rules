@@ -28,7 +28,18 @@ test("parseArgs returns defaults with no args", async () => {
 test("parseArgs parses provider list and flags", async () => {
   const { parseArgs } = await importCLI();
   const opts = withArgs(
-    ["--providers", "cursor, cline,claude", "--no-builtin", "--dry-run", "--input", "rules", "--filter", "**/*.md"],
+    [
+      "--providers",
+      "cursor, cline,claude",
+      "--no-builtin",
+      "--dry-run",
+      "--input",
+      "rules",
+      "--output",
+      "./out",
+      "--filter",
+      "**/*.md",
+    ],
     () => parseArgs(),
   );
 
@@ -36,6 +47,7 @@ test("parseArgs parses provider list and flags", async () => {
   assert.equal(opts.builtin, false);
   assert.equal(opts.dryRun, true);
   assert.equal(opts.input, "rules");
+  assert.equal(opts.output, "./out");
   assert.equal(opts.filter, "**/*.md");
 });
 
