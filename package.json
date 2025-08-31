@@ -9,7 +9,8 @@
     },
     "scripts": {
         "translate_rules": "node src/index.js",
-        "start": "node src/index.js"
+        "start": "node src/index.js",
+        "test": "node --test"
     },
     "repository": {
         "type": "git",
@@ -36,6 +37,6 @@
         "@inquirer/prompts": "^7.8.4"
     },
     "engines": {
-        "node": ">=20.0.0"
+        "node": ">=22.0.0"
     }
 }
