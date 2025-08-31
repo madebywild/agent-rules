@@ -91,6 +91,7 @@ This processes all `.md` files in `agent-rules/` and generates:
 - `.cursor/rules/*.mdc` (Cursor AI rules)
 - `.clinerules/*.md` (Cline rules)
 - `CLAUDE.md` (Combined reference)
+- `.github/copilot-instructions.md` (GitHub Copilot repository instructions)
 - Custom formats via your own providers
 
 ## Adding Rules

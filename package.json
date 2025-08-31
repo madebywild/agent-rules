@@ -31,12 +31,15 @@
     "author": "Made by Wild",
     "license": "MIT",
     "dependencies": {
+        "@inquirer/prompts": "^7.8.4",
         "commander": "^14.0.0",
         "fast-glob": "^3.3.2",
-        "gray-matter": "^4.0.3",
-        "@inquirer/prompts": "^7.8.4"
+        "gray-matter": "^4.0.3"
     },
     "engines": {
         "node": ">=22.0.0"
+    },
+    "devDependencies": {
+        "prettier": "^3.6.2"
     }
 }
