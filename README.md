@@ -2,7 +2,7 @@
 
 <p align="center"><img src="./wiki/cover.webp" alt="Agent Rules" /></p>
 
-Translates markdown rules into AI agent-specific formats using a provider pattern. Now with **production-ready CLI support** for extensive customization and custom provider integration.
+Translates markdown rules into AI agent-specific formats using a provider pattern. With **production-ready CLI support** for extensive customization and custom provider integration.
 
 ## Installation
 
@@ -58,7 +58,7 @@ npx agent-rules --init
 npm run translate_rules
 ```
 
-## CLI Usage (New!)
+## CLI Usage
 
 The enhanced CLI provides production-ready functionality with custom provider support:
 
