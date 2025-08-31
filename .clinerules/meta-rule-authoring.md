@@ -1,22 +1,3 @@
----
-description: |
-  Meta-rule that instructs every LLM-powered agent how to write, store,
-  and compile new “source-of-truth” rules.  
-  - All new rules **must** live in `./agent-rules/` as Markdown files  
-    with the same front-matter structure shown here.  
-  - After a rule is added or changed, the agent must run
-    `./translate_rules.ts` to regenerate provider-specific rule files
-    automatically.  
-  - Agents must **never** write or edit provider-specific rule files
-    directly (e.g. “Cursor” rules); they are generated exclusively by
-    the translation script.
-
-alwaysApply: true
-
-cursor:
-  retrieval-strategy: always
----
-
 # Meta-Rule: Authoring & Storing Agent Rules
 
 ## 1 · Where to Place New Rules
@@ -105,3 +86,4 @@ vim ./cursor-rules/context-window.rule
 
 Following this meta-rule keeps every provider in sync and preserves a
 single, human-readable source of truth for all agent behaviour.
+
