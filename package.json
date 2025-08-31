@@ -1,11 +1,11 @@
 {
-    "name": "rules-translator",
+    "name": "agent-rules",
     "version": "1.0.0",
     "description": "Translates global markdown rules into agent-specific formats.",
     "type": "module",
     "main": "src/index.js",
     "bin": {
-        "rules-translator": "src/index.js"
+        "agent-rules": "src/index.js"
     },
     "scripts": {
         "translate_rules": "node src/index.js",
@@ -13,17 +13,19 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/madebywild/ai-internship.git",
-        "directory": "rules_translator"
+        "url": "https://github.com/madebywild/agent-rules.git"
     },
     "keywords": [
         "ai",
+        "agent",
         "rules",
         "cli",
         "translator",
+        "agent-rules",
         "cursor",
         "cline",
-        "claude"
+        "claude",
+        "copilot"
     ],
     "author": "Made by Wild",
     "license": "MIT",
@@ -34,6 +36,6 @@
         "@inquirer/prompts": "^7.8.4"
     },
     "engines": {
-        "node": ">=18.0.0"
+        "node": ">=20.0.0"
     }
 }

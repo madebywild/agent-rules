@@ -1,6 +1,6 @@
 # CLI Usage Guide
 
-The rules-translator now supports a comprehensive CLI interface for production-ready usage with extensive customization options.
+The agent-rules now supports a comprehensive CLI interface for production-ready usage with extensive customization options.
 
 ## Installation & Setup
 
@@ -8,13 +8,13 @@ The rules-translator now supports a comprehensive CLI interface for production-r
 
 ```bash
 # Install using Personal Access Token (PAT)
-npm install git+https://<YOUR_PAT>@github.com/madebywild/ai-internship.git#main
+npm install git+https://<YOUR_PAT>@github.com/madebywild/agent-rules.git#main
 
 # Install globally for system-wide CLI access
-npm install -g git+https://<YOUR_PAT>@github.com/madebywild/ai-internship.git#main
+npm install -g git+https://<YOUR_PAT>@github.com/madebywild/agent-rules.git#main
 
 # Using SSH (requires SSH key setup)
-npm install git+ssh://git@github.com/madebywild/ai-internship.git#main
+npm install git+ssh://git@github.com/madebywild/agent-rules.git#main
 ```
 
 **📖 For detailed installation instructions, see [INSTALLATION.md](./INSTALLATION.md)**
@@ -24,34 +24,34 @@ npm install git+ssh://git@github.com/madebywild/ai-internship.git#main
 ```bash
 # Environment variable approach (recommended)
 export GITHUB_PAT="ghp_your_token_here"
-npm install git+https://${GITHUB_PAT}@github.com/madebywild/ai-internship.git#main
+npm install git+https://${GITHUB_PAT}@github.com/madebywild/agent-rules.git#main
 ```
 
 ### Verification
 
 ```bash
 # Verify installation
-npx rules-translator --version
-which rules-translator  # (if installed globally)
+npx agent-rules --version
+which agent-rules  # (if installed globally)
 ```
 
 ## Basic Usage
 
 ```bash
 # Use all built-in providers (default behavior)
-npx rules-translator
+npx agent-rules
 
 # Initialize interactively in a new project
-npx rules-translator --init
+npx agent-rules --init
 
 # Show help
-npx rules-translator --help
+npx agent-rules --help
 
 # Show version
-npx rules-translator --version
+npx agent-rules --version
 
 # List available built-in providers
-npx rules-translator --list-providers
+npx agent-rules --list-providers
 ```
 
 ## Provider Management
@@ -60,62 +60,62 @@ npx rules-translator --list-providers
 
 ```bash
 # Use specific built-in providers only
-npx rules-translator --providers cursor,cline
+npx agent-rules --providers cursor,cline
 
 # Exclude built-in providers entirely
-npx rules-translator --no-builtin --provider ./my-provider.js
+npx agent-rules --no-builtin --provider ./my-provider.js
 ```
 
 ### Using Custom Providers
 
 ```bash
 # Add a single custom provider
-npx rules-translator --provider ./my-provider.js
+npx agent-rules --provider ./my-provider.js
 
 # Add multiple custom providers
-npx rules-translator --provider ./provider1.js --provider ./provider2.js
+npx agent-rules --provider ./provider1.js --provider ./provider2.js
 
 # Mix custom and built-in providers
-npx rules-translator --provider ./my-provider.js --providers cursor,cline
+npx agent-rules --provider ./my-provider.js --providers cursor,cline
 
 # Validate a custom provider before using it
-npx rules-translator --validate ./my-provider.js
+npx agent-rules --validate ./my-provider.js
 ```
 
 ## Input/Output Control
 
 ```bash
 # Use custom input directory
-npx rules-translator --input ./my-rules
+npx agent-rules --input ./my-rules
 
 # Filter files by pattern
-npx rules-translator --filter "**/*.md"
-npx rules-translator --filter "git*.md"
+npx agent-rules --filter "**/*.md"
+npx agent-rules --filter "git*.md"
 
 # Dry run to see what would be processed
-npx rules-translator --dry-run
+npx agent-rules --dry-run
 
 # Verbose output for debugging
-npx rules-translator --verbose
+npx agent-rules --verbose
 
 # Minimal output
-npx rules-translator --quiet
+npx agent-rules --quiet
 
 # Initialize and then run with defaults
-npx rules-translator --init && npx rules-translator
+npx agent-rules --init && npx agent-rules
 ```
 
 ## Advanced Configuration
 
 ```bash
 # Load configuration from file
-npx rules-translator --config ./config.json
+npx agent-rules --config ./config.json
 
 # Control parallelism
-npx rules-translator --parallel 2
+npx agent-rules --parallel 2
 
 # Combine multiple options
-npx rules-translator \
+npx agent-rules \
   --provider ./my-provider.js \
   --providers cursor \
   --input ./custom-rules \
@@ -142,7 +142,7 @@ Create a `config.json` file for complex setups:
 Then use it with:
 
 ```bash
-npx rules-translator --config ./config.json
+npx agent-rules --config ./config.json
 ```
 
 CLI options override config file settings.
@@ -158,7 +158,7 @@ import fs from "node:fs/promises";
 
 /**
  * Custom provider for my specific format
- * @implements {import("rules-translator/src/types.js").RuleProvider}
+ * @implements {import("agent-rules/src/types.js").RuleProvider}
  */
 export class MyProvider {
   /**
@@ -177,7 +177,7 @@ export class MyProvider {
 
   /**
    * Convert one rule file to your format
-   * @param {import("rules-translator/src/types.js").RuleFileInput} file
+   * @param {import("agent-rules/src/types.js").RuleFileInput} file
    * @returns {Promise<void>}
    */
   async handle({ filename, frontMatter, content }) {
@@ -207,7 +207,7 @@ export class MyProvider {
 Before using a custom provider in production:
 
 ```bash
-npx rules-translator --validate ./my-provider.js
+npx agent-rules --validate ./my-provider.js
 ```
 
 This will check:
@@ -224,16 +224,16 @@ This will check:
 
 ```bash
 # 1. Validate your custom provider
-npx rules-translator --validate ./my-provider.js
+npx agent-rules --validate ./my-provider.js
 
 # 2. Test with dry run
-npx rules-translator --provider ./my-provider.js --dry-run --verbose
+npx agent-rules --provider ./my-provider.js --dry-run --verbose
 
 # 3. Run with limited scope
-npx rules-translator --provider ./my-provider.js --filter "test*.md"
+npx agent-rules --provider ./my-provider.js --filter "test*.md"
 
 # 4. Full production run
-npx rules-translator --provider ./my-provider.js --quiet
+npx agent-rules --provider ./my-provider.js --quiet
 ```
 
 ### CI/CD Integration
@@ -256,13 +256,13 @@ jobs:
         with:
           node-version: "18"
 
-      - name: Install rules-translator
+      - name: Install agent-rules
         run: |
-          npm install git+https://${{ secrets.GITHUB_TOKEN }}@github.com/madebywild/ai-internship.git#main
+          npm install git+https://${{ secrets.GITHUB_TOKEN }}@github.com/madebywild/agent-rules.git#main
 
       - name: Translate rules
         run: |
-          npx rules-translator \
+          npx agent-rules \
             --provider ./providers/production.js \
             --providers cursor,cline \
             --input ./documentation/rules \
@@ -276,14 +276,14 @@ jobs:
 ARG GITHUB_PAT
 ENV NPM_TOKEN=${GITHUB_PAT}
 
-RUN npm install git+https://${NPM_TOKEN}@github.com/madebywild/ai-internship.git#main
+RUN npm install git+https://${NPM_TOKEN}@github.com/madebywild/agent-rules.git#main
 ```
 
 **Team Usage:**
 
 ```bash
 # In your CI pipeline with secure token storage
-npx rules-translator \
+npx agent-rules \
   --provider ./providers/production.js \
   --providers cursor,cline \
   --input ./documentation/rules \
@@ -294,13 +294,13 @@ npx rules-translator \
 
 ```bash
 # Development
-npx rules-translator --config ./config/dev.json --verbose
+npx agent-rules --config ./config/dev.json --verbose
 
 # Staging
-npx rules-translator --config ./config/staging.json
+npx agent-rules --config ./config/staging.json
 
 # Production
-npx rules-translator --config ./config/prod.json --quiet
+npx agent-rules --config ./config/prod.json --quiet
 ```
 
 ## Error Handling
@@ -312,7 +312,7 @@ The CLI provides clear error messages for common issues:
 - ❌ **ID conflicts**: Ensure unique provider IDs
 - ❌ **Module loading errors**: Verify ES module syntax
 
-Use `DEBUG=1 npx rules-translator ...` for full stack traces during development.
+Use `DEBUG=1 npx agent-rules ...` for full stack traces during development.
 
 ## Best Practices
 
@@ -324,4 +324,4 @@ Use `DEBUG=1 npx rules-translator ...` for full stack traces during development.
 6. **Version your providers** alongside your rules
 7. **Document provider behavior** for team usage
 
-This production-ready CLI makes the rules-translator highly flexible and suitable for complex real-world requirements while maintaining type safety and developer experience.
+This production-ready CLI makes the agent-rules highly flexible and suitable for complex real-world requirements while maintaining type safety and developer experience.

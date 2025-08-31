@@ -10,13 +10,13 @@ This package is not published to NPM. Install directly from the GitHub repositor
 
 ```bash
 # Using Personal Access Token (PAT) - Recommended for CI/CD
-npm install git+https://<YOUR_PAT>@github.com/madebywild/ai-internship.git#main
+npm install git+https://<YOUR_PAT>@github.com/madebywild/agent-rules.git#main
 
 # Using SSH (if you have SSH keys configured)
-npm install git+ssh://git@github.com/madebywild/ai-internship.git#main
+npm install git+ssh://git@github.com/madebywild/agent-rules.git#main
 
 # For global installation
-npm install -g git+https://<YOUR_PAT>@github.com/madebywild/ai-internship.git#main
+npm install -g git+https://<YOUR_PAT>@github.com/madebywild/agent-rules.git#main
 ```
 
 **📖 See [INSTALLATION.md](./INSTALLATION.md) for comprehensive installation guide including:**
@@ -31,14 +31,13 @@ npm install -g git+https://<YOUR_PAT>@github.com/madebywild/ai-internship.git#ma
 1. **Create GitHub PAT:** GitHub → Settings → Developer settings → Personal access tokens
 2. **Grant `repo` scope** for private repository access
 3. **Install:** Replace `<YOUR_PAT>` with your actual token
-4. **Verify:** `npx rules-translator --version`
+4. **Verify:** `npx agent-rules --version`
 
 ### Local Development
 
 ```bash
 # Clone and install for local development
-git clone https://github.com/madebywild/ai-internship.git
-cd ai-internship/rules_translator
+git clone https://github.com/madebywild/agent-rules.git
 npm install
 ```
 
@@ -46,12 +45,12 @@ npm install
 
 ```bash
 # After installation, use as CLI tool
-npx rules-translator --help
-npx rules-translator --list-providers
-npx rules-translator --dry-run --verbose
+npx agent-rules --help
+npx agent-rules --list-providers
+npx agent-rules --dry-run --verbose
 
 # Initialize in a new project (interactive)
-npx rules-translator --init
+npx agent-rules --init
 
 # For local development
 npm run translate_rules
@@ -63,16 +62,16 @@ The enhanced CLI provides production-ready functionality with custom provider su
 
 ```bash
 # Use built-in providers only
-npx rules-translator
+npx agent-rules
 
 # Add custom provider
-npx rules-translator --provider ./my-provider.js
+npx agent-rules --provider ./my-provider.js
 
 # Mix custom and built-in providers
-npx rules-translator --provider ./my-provider.js --providers cursor,cline
+npx agent-rules --provider ./my-provider.js --providers cursor,cline
 
 # Advanced usage
-npx rules-translator \
+npx agent-rules \
   --provider ./my-provider.js \
   --input ./custom-rules \
   --filter "*.md" \
@@ -80,7 +79,7 @@ npx rules-translator \
   --verbose
 
 # Interactive initialization
-npx rules-translator --init
+npx agent-rules --init
 ```
 
 **📖 See [CLI_GUIDE.md](./CLI_GUIDE.md) for comprehensive CLI documentation and examples.**
@@ -122,7 +121,7 @@ import fs from "node:fs/promises";
 
 /**
  * Custom provider for your specific format
- * @implements {import("rules-translator/src/types.js").RuleProvider}
+ * @implements {import("agent-rules/src/types.js").RuleProvider}
  */
 export class MyProvider {
   /**
@@ -139,7 +138,7 @@ export class MyProvider {
   }
 
   /**
-   * @param {import("rules-translator/src/types.js").RuleFileInput} file
+   * @param {import("agent-rules/src/types.js").RuleFileInput} file
    * @returns {Promise<void>}
    */
   async handle({ filename, frontMatter, content }) {
@@ -159,10 +158,10 @@ export class MyProvider {
 
 ```bash
 # Validate your provider before using it
-npx rules-translator --validate ./my-provider.js
+npx agent-rules --validate ./my-provider.js
 
 # Test with dry run
-npx rules-translator --provider ./my-provider.js --dry-run
+npx agent-rules --provider ./my-provider.js --dry-run
 ```
 
 ### Built-in Provider Development

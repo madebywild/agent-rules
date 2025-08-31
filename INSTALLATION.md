@@ -6,13 +6,13 @@ This package is not published to NPM and must be installed directly from the pri
 
 ```bash
 # Using Personal Access Token (most common)
-npm install git+https://<YOUR_PAT>@github.com/madebywild/ai-internship.git#main
+npm install git+https://<YOUR_PAT>@github.com/madebywild/agent-rules.git#main
 
 # Using SSH (if SSH keys are configured)
-npm install git+ssh://git@github.com/madebywild/ai-internship.git#main
+npm install git+ssh://git@github.com/madebywild/agent-rules.git#main
 
 # Global installation for CLI access
-npm install -g git+https://<YOUR_PAT>@github.com/madebywild/ai-internship.git#main
+npm install -g git+https://<YOUR_PAT>@github.com/madebywild/agent-rules.git#main
 ```
 
 ## Personal Access Token Setup
@@ -20,11 +20,13 @@ npm install -g git+https://<YOUR_PAT>@github.com/madebywild/ai-internship.git#ma
 ### Creating a GitHub PAT
 
 1. **Go to GitHub Settings:**
+
    - Navigate to: GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic)
 
 2. **Generate New Token:**
+
    - Click "Generate new token (classic)"
-   - Give it a descriptive name (e.g., "rules-translator-access")
+   - Give it a descriptive name (e.g., "agent-rules-access")
    - Set expiration as needed
    - **Required scope:** `repo` (for private repository access)
 
@@ -37,7 +39,7 @@ npm install -g git+https://<YOUR_PAT>@github.com/madebywild/ai-internship.git#ma
 Replace `<YOUR_PAT>` with your actual token:
 
 ```bash
-npm install git+https://ghp_your_actual_token_here@github.com/madebywild/ai-internship.git#main
+npm install git+https://ghp_your_actual_token_here@github.com/madebywild/agent-rules.git#main
 ```
 
 ## Team & Production Usage
@@ -49,7 +51,7 @@ npm install git+https://ghp_your_actual_token_here@github.com/madebywild/ai-inte
 export GITHUB_PAT="ghp_your_token_here"
 
 # Install using the variable
-npm install git+https://${GITHUB_PAT}@github.com/madebywild/ai-internship.git#main
+npm install git+https://${GITHUB_PAT}@github.com/madebywild/agent-rules.git#main
 ```
 
 ### .npmrc Configuration
@@ -64,7 +66,7 @@ Create a `.npmrc` file in your project root:
 Then install without embedding the token:
 
 ```bash
-npm install git+https://github.com/madebywild/ai-internship.git#main
+npm install git+https://github.com/madebywild/agent-rules.git#main
 ```
 
 **⚠️ Security Note:** Never commit `.npmrc` with tokens to version control. Add it to `.gitignore`.
@@ -76,7 +78,7 @@ Add to your `package.json`:
 ```json
 {
   "dependencies": {
-    "rules-translator": "git+https://github.com/madebywild/ai-internship.git#main"
+    "agent-rules": "git+https://github.com/madebywild/agent-rules.git#main"
   }
 }
 ```
@@ -104,20 +106,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          
+          node-version: "18"
+
       - name: Install dependencies
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          npm install git+https://${GITHUB_TOKEN}@github.com/madebywild/ai-internship.git#main
-          
-      - name: Use rules-translator
-        run: npx rules-translator --help
+          npm install git+https://${GITHUB_TOKEN}@github.com/madebywild/agent-rules.git#main
+
+      - name: Use agent-rules
+        run: npx agent-rules --help
 ```
 
 ### Docker
@@ -132,17 +134,18 @@ ENV GITHUB_PAT=${GITHUB_PAT}
 
 WORKDIR /app
 
-# Install rules-translator
-RUN npm install -g git+https://${GITHUB_PAT}@github.com/madebywild/ai-internship.git#main
+# Install agent-rules
+RUN npm install -g git+https://${GITHUB_PAT}@github.com/madebywild/agent-rules.git#main
 
 # Your app setup
 COPY . .
 RUN npm install
 
-CMD ["rules-translator", "--help"]
+CMD ["agent-rules", "--help"]
 ```
 
 Build with:
+
 ```bash
 docker build --build-arg GITHUB_PAT=ghp_your_token_here .
 ```
@@ -155,8 +158,8 @@ docker build --build-arg GITHUB_PAT=ghp_your_token_here .
 export GITHUB_PAT="${RULES_TRANSLATOR_PAT}"
 
 # Install and use
-npm install git+https://${GITHUB_PAT}@github.com/madebywild/ai-internship.git#main
-npx rules-translator --version
+npm install git+https://${GITHUB_PAT}@github.com/madebywild/agent-rules.git#main
+npx agent-rules --version
 ```
 
 ## SSH Alternative
@@ -171,7 +174,7 @@ ssh-add ~/.ssh/id_ed25519
 # Add public key to GitHub: Settings → SSH and GPG keys → New SSH key
 
 # Install using SSH
-npm install git+ssh://git@github.com/madebywild/ai-internship.git#main
+npm install git+ssh://git@github.com/madebywild/agent-rules.git#main
 ```
 
 ## Troubleshooting
@@ -179,25 +182,31 @@ npm install git+ssh://git@github.com/madebywild/ai-internship.git#main
 ### Common Issues
 
 **Authentication Failed:**
+
 ```
 npm ERR! fatal: Authentication failed
 ```
+
 - Verify your PAT is correct and not expired
 - Ensure PAT has `repo` scope for private repositories
 - Check if token is properly escaped in URL
 
 **Permission Denied (SSH):**
+
 ```
 npm ERR! Permission denied (publickey)
 ```
+
 - Verify SSH key is added to GitHub
 - Test SSH connection: `ssh -T git@github.com`
 - Ensure SSH agent is running: `ssh-add -l`
 
 **Package Not Found:**
+
 ```
 npm ERR! 404 Not Found
 ```
+
 - Verify repository URL is correct
 - Check if you have access to the private repository
 - Ensure you're using the correct branch name
@@ -206,25 +215,25 @@ npm ERR! 404 Not Found
 
 ```bash
 # Verify installation
-npx rules-translator --version
+npx agent-rules --version
 
 # Check globally installed location
-npm list -g rules-translator
+npm list -g agent-rules
 
 # Test basic functionality
-npx rules-translator --help
-npx rules-translator --list-providers
+npx agent-rules --help
+npx agent-rules --list-providers
 ```
 
 ### Updating
 
 ```bash
 # Update to latest version
-npm update git+https://<YOUR_PAT>@github.com/madebywild/ai-internship.git#main
+npm update git+https://<YOUR_PAT>@github.com/madebywild/agent-rules.git#main
 
 # Or uninstall and reinstall
-npm uninstall rules-translator
-npm install git+https://<YOUR_PAT>@github.com/madebywild/ai-internship.git#main
+npm uninstall agent-rules
+npm install git+https://<YOUR_PAT>@github.com/madebywild/agent-rules.git#main
 ```
 
 ## Security Best Practices
@@ -243,8 +252,7 @@ For development work on the package itself:
 
 ```bash
 # Clone repository
-git clone git@github.com:madebywild/ai-internship.git
-cd ai-internship/rules_translator
+git clone git@github.com:madebywild/agent-rules.git
 
 # Install dependencies
 npm install
@@ -253,5 +261,5 @@ npm install
 npm link
 
 # Use globally
-rules-translator --help
+agent-rules --help
 ```

@@ -186,7 +186,7 @@ async function main() {
 const isMainModule =
   process.argv[1] &&
   (fileURLToPath(import.meta.url) === process.argv[1] ||
-    process.argv[1].includes("rules-translator"));
+    process.argv[1].includes("agent-rules"));
 
 if (isMainModule) {
   main();

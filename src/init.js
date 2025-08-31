@@ -25,7 +25,7 @@ async function copyDirRecursive(srcDir, destDir) {
 }
 
 export async function runInit() {
-  console.log("\n🧰 rules-translator initialization\n");
+  console.log("\n🧰 agent-rules initialization\n");
 
   const cwd = process.cwd();
   const defaultRulesDir = path.resolve(cwd, "agent-rules");
@@ -110,6 +110,6 @@ export async function runInit() {
   }
 
   console.log(
-    "\n🎉 Initialization complete. You can now run: \n   npx rules-translator\n"
+    "\n🎉 Initialization complete. You can now run: \n   npx agent-rules\n"
   );
 }

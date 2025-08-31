@@ -29,7 +29,7 @@ export function parseArgs() {
   const program = new Command();
 
   program
-    .name("rules-translator")
+    .name("agent-rules")
     .description("Translates global markdown rules into agent-specific formats")
     .version("1.0.0");
 
@@ -81,7 +81,7 @@ export function parseArgs() {
   // Init/setup option
   program.option(
     "--init",
-    "Run interactive setup to initialize rules-translator in this workspace"
+    "Run interactive setup to initialize agent-rules in this workspace"
   );
 
   program.parse();
@@ -94,7 +94,7 @@ export function parseArgs() {
  */
 export function showHelp() {
   console.log(`
-Usage: rules-translator [options]
+Usage: agent-rules [options]
 
 Translates global markdown rules into agent-specific formats.
 
@@ -118,22 +118,22 @@ Options:
 
 Examples:
   # Use built-in providers only
-  rules-translator
+  agent-rules
 
   # Use custom provider only
-  rules-translator --provider ./my-provider.js --no-builtin
+  agent-rules --provider ./my-provider.js --no-builtin
 
   # Mix built-in and custom providers
-  rules-translator --provider ./my-provider.js --providers cursor,cline
+  agent-rules --provider ./my-provider.js --providers cursor,cline
 
   # Advanced usage with custom input and filtering
-  rules-translator --input ./custom-rules --filter "**/*.md" --dry-run --verbose
+  agent-rules --input ./custom-rules --filter "**/*.md" --dry-run --verbose
 
   # Validate a custom provider before using it
-  rules-translator --validate ./my-provider.js
+  agent-rules --validate ./my-provider.js
 
   # Initialize in current project
-  rules-translator --init
+  agent-rules --init
 
 Custom Provider Requirements:
   - Must export a class that implements the RuleProvider interface
