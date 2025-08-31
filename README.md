@@ -1,6 +1,6 @@
 # Agent Rules
 
-<p align="center"><img src="./wiki/cover.webp" alt="Agent Rules" /></p>
+<p align="center"><img src="./wiki/cover.avif" alt="Agent Rules" /></p>
 
 Translates markdown rules into AI agent-specific formats using a provider pattern. With **production-ready CLI support** for extensive customization and custom provider integration.
 
