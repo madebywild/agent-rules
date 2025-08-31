@@ -10,7 +10,8 @@
     "scripts": {
         "translate_rules": "node src/index.js",
         "start": "node src/index.js",
-        "test": "node --test"
+        "test": "node --test",
+        "format": "prettier --write ."
     },
     "repository": {
         "type": "git",
