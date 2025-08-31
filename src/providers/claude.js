@@ -23,7 +23,7 @@ export class ClaudeProvider {
    * @private
    * @type {string}
    */
-  #buffer = "";                         // collect as we go
+  #buffer = ""; // collect as we go
 
   /**
    * Prepare output file, remove any existing file

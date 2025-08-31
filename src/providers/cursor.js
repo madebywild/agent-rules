@@ -36,10 +36,7 @@ export class CursorProvider {
    * @returns {Promise<void>}
    */
   async handle({ filename, frontMatter, content }) {
-    const outFile = path.join(
-      this.#outDir,
-      filename.replace(/\.md$/, ".mdc"),
-    );
+    const outFile = path.join(this.#outDir, filename.replace(/\.md$/, ".mdc"));
 
     // provider-specific overrides live under `cursor:` in the YAML
     const yaml = { ...frontMatter, ...(frontMatter.cursor ?? {}) };

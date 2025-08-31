@@ -7,11 +7,7 @@ import fastGlob from "fast-glob";
 import { fileURLToPath } from "node:url";
 import { parseArgs, showHelp, listProviders, loadConfig } from "./cli.js";
 import { runInit } from "./init.js";
-import {
-  loadProviders,
-  getBuiltinProviders,
-  validateProviderFile,
-} from "./provider-loader.js";
+import { loadProviders, getBuiltinProviders, validateProviderFile } from "./provider-loader.js";
 
 /**
  * Build rules by processing all markdown files and converting them using providers
@@ -24,20 +20,13 @@ import {
  * @param {boolean} options.quiet - Whether to use minimal logging
  * @returns {Promise<void>}
  */
-export async function buildRules({
-  providers,
-  inputDir,
-  filePattern,
-  dryRun,
-  verbose,
-  quiet,
-}) {
+export async function buildRules({ providers, inputDir, filePattern, dryRun, verbose, quiet }) {
   const SRC_DIR = path.resolve(inputDir);
 
   if (!quiet) {
     console.log(`🔍 Scanning for files in: ${SRC_DIR}`);
     console.log(`📁 Pattern: ${filePattern}`);
-    console.log(`🔧 Providers: ${providers.map((p) => p.id).join(", ")}`);
+    console.log(`🔧 Providers: ${providers.map(p => p.id).join(", ")}`);
   }
 
   // Check if source directory exists
@@ -79,12 +68,12 @@ export async function buildRules({
     console.log("🚀 Initializing providers...");
   }
   await Promise.all(
-    providers.map(async (p) => {
+    providers.map(async p => {
       if (verbose) {
         console.log(`  Initializing ${p.id}...`);
       }
       await p.init();
-    })
+    }),
   );
 
   // one pass over every source file
@@ -101,12 +90,12 @@ export async function buildRules({
     const { data: frontMatter, content } = matter(raw);
 
     await Promise.all(
-      providers.map(async (p) => {
+      providers.map(async p => {
         if (verbose) {
           console.log(`    ${p.id}: ${filename}`);
         }
         await p.handle({ filename, frontMatter, content });
-      })
+      }),
     );
   }
 
@@ -115,12 +104,12 @@ export async function buildRules({
     console.log("🏁 Finalizing providers...");
   }
   await Promise.all(
-    providers.map(async (p) => {
+    providers.map(async p => {
       if (verbose) {
         console.log(`  Finalizing ${p.id}...`);
       }
       await p.finish();
-    })
+    }),
   );
 
   if (!quiet) {
@@ -184,9 +173,7 @@ async function main() {
 
 // Run directly when executed (either directly or as a CLI tool)
 const isMainModule =
-  process.argv[1] &&
-  (fileURLToPath(import.meta.url) === process.argv[1] ||
-    process.argv[1].includes("agent-rules"));
+  process.argv[1] && (fileURLToPath(import.meta.url) === process.argv[1] || process.argv[1].includes("agent-rules"));
 
 if (isMainModule) {
   main();

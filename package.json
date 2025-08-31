@@ -1,46 +1,46 @@
 {
-    "name": "agent-rules",
-    "version": "1.0.0",
-    "description": "Translates global markdown rules into agent-specific formats.",
-    "type": "module",
-    "main": "src/index.js",
-    "bin": {
-        "agent-rules": "src/index.js"
-    },
-    "scripts": {
-        "translate_rules": "node src/index.js",
-        "start": "node src/index.js",
-        "test": "node --test",
-        "format": "prettier --write ."
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/madebywild/agent-rules.git"
-    },
-    "keywords": [
-        "ai",
-        "agent",
-        "rules",
-        "cli",
-        "translator",
-        "agent-rules",
-        "cursor",
-        "cline",
-        "claude",
-        "copilot"
-    ],
-    "author": "Made by Wild",
-    "license": "MIT",
-    "dependencies": {
-        "@inquirer/prompts": "^7.8.4",
-        "commander": "^14.0.0",
-        "fast-glob": "^3.3.2",
-        "gray-matter": "^4.0.3"
-    },
-    "engines": {
-        "node": ">=22.0.0"
-    },
-    "devDependencies": {
-        "prettier": "^3.6.2"
-    }
+  "name": "agent-rules",
+  "version": "1.0.0",
+  "description": "Translates global markdown rules into agent-specific formats.",
+  "type": "module",
+  "main": "src/index.js",
+  "bin": {
+    "agent-rules": "src/index.js"
+  },
+  "scripts": {
+    "translate_rules": "node src/index.js",
+    "start": "node src/index.js",
+    "test": "node --test",
+    "format": "prettier --write ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/madebywild/agent-rules.git"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "rules",
+    "cli",
+    "translator",
+    "agent-rules",
+    "cursor",
+    "cline",
+    "claude",
+    "copilot"
+  ],
+  "author": "Made by Wild",
+  "license": "MIT",
+  "dependencies": {
+    "@inquirer/prompts": "^7.8.4",
+    "commander": "^14.0.0",
+    "fast-glob": "^3.3.2",
+    "gray-matter": "^4.0.3"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2"
+  }
 }

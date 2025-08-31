@@ -14,12 +14,10 @@ test("getBuiltinProviders returns known providers", async () => {
   const providers = await getBuiltinProviders();
   assert.ok(Array.isArray(providers));
   assert.equal(providers.length, 4);
-  providers.forEach((p) => {
+  providers.forEach(p => {
     assert.equal(typeof p.id, "string");
     assert.ok(p.id.length > 0);
-    ["init", "handle", "finish"].forEach((m) =>
-      assert.equal(typeof p[m], "function")
-    );
+    ["init", "handle", "finish"].forEach(m => assert.equal(typeof p[m], "function"));
   });
 });
 
@@ -28,13 +26,10 @@ test("filterProvidersByIds filters and validates ids", async () => {
   const filtered = filterProvidersByIds(providers, [providers[0].id]);
   assert.equal(filtered.length, 1);
   assert.equal(filtered[0].id, providers[0].id);
-  assert.throws(
-    () => filterProvidersByIds(providers, ["missing"]),
-    /Unknown provider ID/
-  );
+  assert.throws(() => filterProvidersByIds(providers, ["missing"]), /Unknown provider ID/);
 });
 
-test("loadCustomProvider and validateProviderFile with default export class", async (t) => {
+test("loadCustomProvider and validateProviderFile with default export class", async t => {
   const dir = await makeTestDir(t, "provider");
   const file = path.join(dir, "custom-provider.mjs");
   const content = `export default class CustomProvider {\n  constructor() { this.id = 'custom'; }\n  async init() {}\n  async handle() {}\n  async finish() {}\n}`;

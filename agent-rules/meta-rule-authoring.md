@@ -20,24 +20,27 @@ cursor:
 # Meta-Rule: Authoring & Storing Agent Rules
 
 ## 1 · Where to Place New Rules
-- Create every new rule as a **Markdown file** inside **`./agent-rules/`**.  
+
+- Create every new rule as a **Markdown file** inside **`./agent-rules/`**.
 - Name the file in **kebab-case**, summarising its intent  
   (e.g. `rate-limit-handling.md`).
 
 ## 2 · Mandatory Front-Matter
+
 Each rule **must** begin with YAML front-matter exactly like this:
 
 ```yaml
 ---
 description: |
   One-sentence summary of the rule’s purpose.
-alwaysApply: false   # or true, if the rule should always run
+alwaysApply: false # or true, if the rule should always run
 cursor:
   retrieval-strategy: always
 ---
 ```
 
 ## 3 · Compilation Workflow
+
 After saving or modifying a rule inside this ./agent-rules folder:
 
 ```bash
@@ -48,14 +51,16 @@ The script converts all Markdown rules in **`./agent-rules/`** into the
 provider-specific formats expected by each agent type.
 
 ## 4 · Provider Files Are Read-Only
+
 - **Do not** author, edit, or commit rule files that live inside provider
-  folders (e.g. `./.cursor/rules/`, `./.clinerules/`).  
+  folders (e.g. `./.cursor/rules/`, `./.clinerules/`).
 - Treat those files as **generated artifacts**; regenerate them via the
   translation script whenever the source-of-truth rule changes.
 
 ## 5 · Good vs Bad Practice
 
 ### Good
+
 ```bash
 # Create the source-of-truth rule
 touch ./agent-rules/context-window.md
@@ -64,6 +69,7 @@ npm run translate_rules   # Regenerates provider files
 ```
 
 ### Bad
+
 ```bash
 # Directly editing a Cursor-specific rule
 vim ./cursor-rules/context-window.rule

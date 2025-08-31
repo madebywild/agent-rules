@@ -41,27 +41,19 @@ export function parseArgs() {
       (value, previous) => {
         return previous ? previous.concat([value]) : [value];
       },
-      []
+      [],
     )
-    .option(
-      "--providers <list>",
-      "Run only specific built-in providers (comma-separated)",
-      (value) => {
-        return value
-          .split(",")
-          .map((p) => p.trim())
-          .filter(Boolean);
-      }
-    )
+    .option("--providers <list>", "Run only specific built-in providers (comma-separated)", value => {
+      return value
+        .split(",")
+        .map(p => p.trim())
+        .filter(Boolean);
+    })
     .option("--no-builtin", "Don't load built-in providers, only custom ones");
 
   // Input/Output options
   program
-    .option(
-      "--input <path>",
-      "Source directory containing rule files",
-      "agent-rules"
-    )
+    .option("--input <path>", "Source directory containing rule files", "agent-rules")
     .option("--output <path>", "Base output directory override")
     .option("--dry-run", "Show what would be done without executing");
 
@@ -79,10 +71,7 @@ export function parseArgs() {
     .option("--parallel <number>", "Control parallelism", parseInt, 4);
 
   // Init/setup option
-  program.option(
-    "--init",
-    "Run interactive setup to initialize agent-rules in this workspace"
-  );
+  program.option("--init", "Run interactive setup to initialize agent-rules in this workspace");
 
   program.parse();
 
@@ -166,8 +155,6 @@ export async function loadConfig(configPath) {
     const config = JSON.parse(configContent);
     return config;
   } catch (error) {
-    throw new Error(
-      `Failed to load configuration from ${configPath}: ${error.message}`
-    );
+    throw new Error(`Failed to load configuration from ${configPath}: ${error.message}`);
   }
 }

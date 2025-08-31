@@ -2,7 +2,6 @@
 description: |
   Defines how every AI prototype must be laid out in the repository.
 alwaysApply: true
-
 cursor:
   retrieval-strategy: always
 ---
@@ -11,7 +10,7 @@ cursor:
 
 ## Organization Guidelines
 
-- **Routes** go in **`/site/app/routes`**  
+- **Routes** go in **`/site/app/routes`**
 - **All prototype‑specific code** (components, hooks, logic, utilities) lives in  
   **`/site/app/prototypes/[prototype-slug]`**
 
@@ -38,7 +37,7 @@ export function MyComponent() {
 }
 ```
 
-### Bad Example 
+### Bad Example
 
 ```typescript
 // File: /site/app/routes/my-prototype.tsx

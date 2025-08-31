@@ -9,11 +9,7 @@ import path from "node:path";
 export async function clearDir(dir) {
   try {
     const entries = await fs.readdir(dir, { withFileTypes: true });
-    await Promise.all(
-      entries.map((e) =>
-        fs.rm(path.join(dir, e.name), { recursive: true, force: true }),
-      ),
-    );
+    await Promise.all(entries.map(e => fs.rm(path.join(dir, e.name), { recursive: true, force: true })));
   } catch (err) {
     if (err.code !== "ENOENT") throw err;
   }

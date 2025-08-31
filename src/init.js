@@ -88,19 +88,14 @@ export async function runInit() {
     try {
       existing = await fs.readFile(gitignorePath, "utf8");
     } catch {}
-    const additions = suggestedIgnores.filter((e) => !existing.includes(e));
+    const additions = suggestedIgnores.filter(e => !existing.includes(e));
     if (additions.length > 0) {
       const add = await confirm({
-        message: `Add ${additions.length} ignore entr${
-          additions.length === 1 ? "y" : "ies"
-        } to .gitignore?`,
+        message: `Add ${additions.length} ignore entr${additions.length === 1 ? "y" : "ies"} to .gitignore?`,
         default: true,
       });
       if (add) {
-        const newContent =
-          (existing ? existing.trimEnd() + "\n" : "") +
-          additions.join("\n") +
-          "\n";
+        const newContent = (existing ? existing.trimEnd() + "\n" : "") + additions.join("\n") + "\n";
         await fs.writeFile(gitignorePath, newContent, "utf8");
         console.log("✅ Updated .gitignore.");
       }
@@ -109,7 +104,5 @@ export async function runInit() {
     console.log(`⚠️  Could not update .gitignore: ${e.message}`);
   }
 
-  console.log(
-    "\n🎉 Initialization complete. You can now run: \n   npx agent-rules\n"
-  );
+  console.log("\n🎉 Initialization complete. You can now run: \n   npx agent-rules\n");
 }

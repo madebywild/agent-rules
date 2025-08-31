@@ -92,6 +92,7 @@ export class CursorProvider {
 ### VSCode
 
 VSCode automatically recognizes JSDoc annotations and provides:
+
 - Type checking and error highlighting
 - IntelliSense autocompletion
 - Parameter hints
@@ -183,6 +184,7 @@ const providers = [
 ## Type Safety Best Practices
 
 1. **Always document parameters and return types:**
+
    ```javascript
    /**
     * @param {string} input - Input string
@@ -192,6 +194,7 @@ const providers = [
    ```
 
 2. **Use `@private` for internal class members:**
+
    ```javascript
    /**
     * @private
@@ -201,6 +204,7 @@ const providers = [
    ```
 
 3. **Import types from other modules:**
+
    ```javascript
    /**
     * @param {import("./types.js").RuleProvider} provider
@@ -208,6 +212,7 @@ const providers = [
    ```
 
 4. **Document complex objects inline:**
+
    ```javascript
    /**
     * @param {{name: string, age: number}} user - User object
@@ -231,6 +236,7 @@ const providers = [
 ## Common Patterns
 
 ### Error Handling
+
 ```javascript
 /**
  * @param {string} path - File path
@@ -239,7 +245,7 @@ const providers = [
  */
 async function readFile(path) {
   try {
-    return await fs.readFile(path, 'utf8');
+    return await fs.readFile(path, "utf8");
   } catch (err) {
     throw new Error(`Failed to read file: ${err.message}`);
   }
@@ -247,6 +253,7 @@ async function readFile(path) {
 ```
 
 ### Optional Parameters
+
 ```javascript
 /**
  * @param {string} name - Required name

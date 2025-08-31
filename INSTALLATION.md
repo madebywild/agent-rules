@@ -20,11 +20,9 @@ npm install -g git+https://<YOUR_PAT>@github.com/madebywild/agent-rules.git#main
 ### Creating a GitHub PAT
 
 1. **Go to GitHub Settings:**
-
    - Navigate to: GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic)
 
 2. **Generate New Token:**
-
    - Click "Generate new token (classic)"
    - Give it a descriptive name (e.g., "agent-rules-access")
    - Set expiration as needed

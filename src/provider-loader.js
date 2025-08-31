@@ -16,9 +16,7 @@ export function validateProvider(provider, source = "provider") {
   }
 
   if (typeof provider.id !== "string" || !provider.id.trim()) {
-    throw new Error(
-      `${source}: Provider must have a non-empty string 'id' property`
-    );
+    throw new Error(`${source}: Provider must have a non-empty string 'id' property`);
   }
 
   if (typeof provider.init !== "function") {
@@ -67,26 +65,23 @@ export async function loadCustomProvider(providerPath) {
       return module.default;
     } else {
       // Look for named exports that look like provider classes
-      const exports = Object.keys(module).filter((key) => key !== "default");
-      const providerExports = exports.filter((key) => {
+      const exports = Object.keys(module).filter(key => key !== "default");
+      const providerExports = exports.filter(key => {
         const value = module[key];
-        return (
-          typeof value === "function" &&
-          (key.includes("Provider") || key.includes("provider"))
-        );
+        return typeof value === "function" && (key.includes("Provider") || key.includes("provider"));
       });
 
       if (providerExports.length === 0) {
         throw new Error(
-          `No provider class found in ${providerPath}. Expected a class named *Provider or default export.`
+          `No provider class found in ${providerPath}. Expected a class named *Provider or default export.`,
         );
       }
 
       if (providerExports.length > 1) {
         throw new Error(
           `Multiple provider classes found in ${providerPath}: ${providerExports.join(
-            ", "
-          )}. Please export only one provider class or use default export.`
+            ", ",
+          )}. Please export only one provider class or use default export.`,
         );
       }
 
@@ -104,13 +99,9 @@ export async function loadCustomProvider(providerPath) {
     if (error.code === "ENOENT") {
       throw new Error(`Provider file not found: ${providerPath}`);
     } else if (error.code === "ERR_MODULE_NOT_FOUND") {
-      throw new Error(
-        `Failed to load provider from ${providerPath}: Module not found or invalid ES module`
-      );
+      throw new Error(`Failed to load provider from ${providerPath}: Module not found or invalid ES module`);
     } else {
-      throw new Error(
-        `Failed to load provider from ${providerPath}: ${error.message}`
-      );
+      throw new Error(`Failed to load provider from ${providerPath}: ${error.message}`);
     }
   }
 }
@@ -125,12 +116,7 @@ export async function getBuiltinProviders() {
   const { ClaudeProvider } = await import("./providers/claude.js");
   const { CopilotProvider } = await import("./providers/copilot.js");
 
-  return [
-    new CursorProvider(),
-    new ClineProvider(),
-    new ClaudeProvider(),
-    new CopilotProvider(),
-  ];
+  return [new CursorProvider(), new ClineProvider(), new ClaudeProvider(), new CopilotProvider()];
 }
 
 /**
@@ -141,18 +127,14 @@ export async function getBuiltinProviders() {
  */
 export function filterProvidersByIds(providers, ids) {
   const filtered = [];
-  const availableIds = providers.map((p) => p.id);
+  const availableIds = providers.map(p => p.id);
 
   for (const id of ids) {
-    const provider = providers.find((p) => p.id === id);
+    const provider = providers.find(p => p.id === id);
     if (provider) {
       filtered.push(provider);
     } else {
-      throw new Error(
-        `Unknown provider ID: ${id}. Available providers: ${availableIds.join(
-          ", "
-        )}`
-      );
+      throw new Error(`Unknown provider ID: ${id}. Available providers: ${availableIds.join(", ")}`);
     }
   }
 
@@ -173,10 +155,7 @@ export async function loadProviders(options) {
 
     // Filter by specific provider IDs if specified
     if (options.providers && options.providers.length > 0) {
-      const filtered = filterProvidersByIds(
-        builtinProviders,
-        options.providers
-      );
+      const filtered = filterProvidersByIds(builtinProviders, options.providers);
       providers.push(...filtered);
     } else {
       providers.push(...builtinProviders);
@@ -190,26 +169,20 @@ export async function loadProviders(options) {
         const customProvider = await loadCustomProvider(providerPath);
 
         // Check for ID conflicts
-        const existingIds = providers.map((p) => p.id);
+        const existingIds = providers.map(p => p.id);
         if (existingIds.includes(customProvider.id)) {
-          throw new Error(
-            `Provider ID conflict: '${customProvider.id}' is already used by another provider`
-          );
+          throw new Error(`Provider ID conflict: '${customProvider.id}' is already used by another provider`);
         }
 
         providers.push(customProvider);
       } catch (error) {
-        throw new Error(
-          `Failed to load custom provider '${providerPath}': ${error.message}`
-        );
+        throw new Error(`Failed to load custom provider '${providerPath}': ${error.message}`);
       }
     }
   }
 
   if (providers.length === 0) {
-    throw new Error(
-      "No providers specified. Use built-in providers or provide custom providers with --provider."
-    );
+    throw new Error("No providers specified. Use built-in providers or provide custom providers with --provider.");
   }
 
   return providers;
