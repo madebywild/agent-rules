@@ -1,0 +1,10 @@
+---
+description: |
+  Integration test rule for provider filtering
+globs: []
+alwaysApply: false
+---
+
+# Integration Test Rule
+
+This rule should only be processed by Cursor provider during integration testing.

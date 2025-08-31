@@ -8,6 +8,7 @@ import { fileURLToPath } from "node:url";
 import { parseArgs, showHelp, listProviders, loadConfig } from "./cli.js";
 import { runInit } from "./init.js";
 import { loadProviders, getBuiltinProviders, validateProviderFile } from "./provider-loader.js";
+import { filterProvidersForRule, cleanFrontMatter } from "./utils.js";
 
 /**
  * Build rules by processing all markdown files and converting them using providers
@@ -89,12 +90,22 @@ export async function buildRules({ providers, inputDir, filePattern, dryRun, ver
     const raw = await fs.readFile(path.join(SRC_DIR, filename), "utf8");
     const { data: frontMatter, content } = matter(raw);
 
+    // Filter providers based on rule metadata
+    const filteredProviders = filterProvidersForRule(providers, frontMatter);
+    
+    // Clean front matter to remove processing directives
+    const cleanedFrontMatter = cleanFrontMatter(frontMatter);
+
+    if (verbose && filteredProviders.length !== providers.length) {
+      console.log(`    Filtered providers for ${filename}: ${filteredProviders.map(p => p.id).join(", ")}`);
+    }
+
     await Promise.all(
-      providers.map(async p => {
+      filteredProviders.map(async p => {
         if (verbose) {
           console.log(`    ${p.id}: ${filename}`);
         }
-        await p.handle({ filename, frontMatter, content });
+        await p.handle({ filename, frontMatter: cleanedFrontMatter, content });
       }),
     );
   }

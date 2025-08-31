@@ -39,6 +39,31 @@ cursor:
 ---
 ```
 
+### Optional Provider Filtering
+
+You can control which providers process each rule by adding these optional fields:
+
+```yaml
+---
+description: |
+  One-sentence summary of the rule's purpose.
+alwaysApply: false
+# Only generate this rule for specific providers (comma-separated)
+_includeOnlyForProviders: cursor,cline
+# OR exclude this rule from specific providers (comma-separated)  
+_excludeForProviders: claude
+cursor:
+  retrieval-strategy: always
+---
+```
+
+**Provider filtering rules:**
+- **`_includeOnlyForProviders`**: If specified, only the listed providers will process this rule
+- **`_excludeForProviders`**: The listed providers will skip processing this rule
+- If both are specified, `_includeOnlyForProviders` takes precedence
+- These fields are automatically removed from generated output files
+- Provider names should match the built-in provider IDs: `cursor`, `cline`, `claude`, `copilot`
+
 ## 3 · Compilation Workflow
 
 After saving or modifying a rule inside this ./agent-rules folder:
