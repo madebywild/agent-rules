@@ -1,4 +1,6 @@
-# Rules Translator
+# Agent Rules
+
+<p align="center"><img src="./wiki/cover.webp" alt="Agent Rules" /></p>
 
 Translates markdown rules into AI agent-specific formats using a provider pattern. Now with **production-ready CLI support** for extensive customization and custom provider integration.
 
