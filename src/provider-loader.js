@@ -115,12 +115,14 @@ export async function getBuiltinProviders(baseOutputDir) {
   const { ClineProvider } = await import("./providers/cline.js");
   const { ClaudeProvider } = await import("./providers/claude.js");
   const { CopilotProvider } = await import("./providers/copilot.js");
+  const { OpenAIProvider } = await import("./providers/openai.js");
 
   return [
     new CursorProvider(baseOutputDir),
     new ClineProvider(baseOutputDir),
     new ClaudeProvider(baseOutputDir),
     new CopilotProvider(baseOutputDir),
+    new OpenAIProvider(baseOutputDir),
   ];
 }
 
