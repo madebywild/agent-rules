@@ -136,6 +136,13 @@ async function main() {
   try {
     const options = parseArgs();
 
+    // Merge with config file if specified early for special commands
+    let finalOptions = options;
+    if (options.config) {
+      const configOptions = await loadConfig(options.config);
+      finalOptions = { ...configOptions, ...options }; // CLI options override config
+    }
+
     // Handle special commands first
     if (options.listProviders) {
       const builtinProviders = await getBuiltinProviders(finalOptions.output);
@@ -152,13 +159,6 @@ async function main() {
     if (options.init) {
       await runInit();
       return;
-    }
-
-    // Merge with config file if specified
-    let finalOptions = options;
-    if (options.config) {
-      const configOptions = await loadConfig(options.config);
-      finalOptions = { ...configOptions, ...options }; // CLI options override config
     }
 
     // Warn when using custom output directory (intended for tests/CI only)
