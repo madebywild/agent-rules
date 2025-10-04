@@ -13,7 +13,7 @@ import { makeTestDir } from "./helpers/fs.js";
 test("getBuiltinProviders returns known providers", async () => {
   const providers = await getBuiltinProviders();
   assert.ok(Array.isArray(providers));
-  assert.equal(providers.length, 4);
+  assert.equal(providers.length, 5);
   providers.forEach(p => {
     assert.equal(typeof p.id, "string");
     assert.ok(p.id.length > 0);

@@ -27,7 +27,8 @@
     "cursor",
     "cline",
     "claude",
-    "copilot"
+    "copilot",
+    "openai"
   ],
   "author": "Made by Wild",
   "license": "MIT",

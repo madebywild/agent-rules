@@ -122,6 +122,7 @@ This processes all `.md` files in `agent-rules/` and generates:
 - `.clinerules/*.md` (Cline rules)
 - `CLAUDE.md` (Combined reference)
 - `.github/copilot-instructions.md` (GitHub Copilot repository instructions)
+- `AGENTS.md` (OpenAI AGENTS.md format - open standard for AI agent instructions)
 - Custom formats via your own providers
 
 ## Adding Rules
