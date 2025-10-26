@@ -86,4 +86,5 @@ test("built-in providers respect base output directory", async t => {
   await fs.access(path.join(tmp, "CLAUDE.md"));
   await fs.access(path.join(tmp, ".github/copilot-instructions.md"));
   await fs.access(path.join(tmp, "AGENTS.md"));
+  await fs.access(path.join(tmp, "replit.md"));
 });

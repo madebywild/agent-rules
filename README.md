@@ -123,6 +123,7 @@ This processes all `.md` files in `agent-rules/` and generates:
 - `CLAUDE.md` (Combined reference)
 - `.github/copilot-instructions.md` (GitHub Copilot repository instructions)
 - `AGENTS.md` (OpenAI AGENTS.md format - open standard for AI agent instructions)
+- `replit.md` (Replit AI instructions)
 - Custom formats via your own providers
 
 ## Adding Rules
@@ -247,6 +248,9 @@ src/
 .cursor/rules/        # Cursor AI format
 .clinerules/          # Cline format
 CLAUDE.md             # Combined format
+.github/copilot-instructions.md  # GitHub Copilot format
+AGENTS.md             # OpenAI format
+replit.md             # Replit format
 ```
 
 ## Documentation
