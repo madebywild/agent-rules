@@ -4,28 +4,20 @@ The agent-rules now supports a comprehensive CLI interface for production-ready 
 
 ## Installation & Setup
 
-### Installing from Private GitHub Repository
+### Installing from GitHub Repository
 
 ```bash
-# Install using Personal Access Token (PAT)
-npm install git+https://<YOUR_PAT>@github.com/madebywild/agent-rules.git#main
+# Install using HTTPS
+npm install git+https://github.com/madebywild/agent-rules.git#main
 
 # Install globally for system-wide CLI access
-npm install -g git+https://<YOUR_PAT>@github.com/madebywild/agent-rules.git#main
+npm install -g git+https://github.com/madebywild/agent-rules.git#main
 
 # Using SSH (requires SSH key setup)
 npm install git+ssh://git@github.com/madebywild/agent-rules.git#main
 ```
 
 **📖 For detailed installation instructions, see [INSTALLATION.md](./INSTALLATION.md)**
-
-### Quick PAT Setup
-
-```bash
-# Environment variable approach (recommended)
-export GITHUB_PAT="ghp_your_token_here"
-npm install git+https://${GITHUB_PAT}@github.com/madebywild/agent-rules.git#main
-```
 
 ### Verification
 
@@ -272,11 +264,8 @@ jobs:
 **Docker Example:**
 
 ```dockerfile
-# Use build argument for PAT
-ARG GITHUB_PAT
-ENV NPM_TOKEN=${GITHUB_PAT}
-
-RUN npm install git+https://${NPM_TOKEN}@github.com/madebywild/agent-rules.git#main
+# Install agent-rules from GitHub
+RUN npm install git+https://github.com/madebywild/agent-rules.git#main
 ```
 
 **Team Usage:**
