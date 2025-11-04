@@ -12,9 +12,6 @@ This package is not published to NPM. Install directly from the GitHub repositor
 # Using HTTPS
 npm install git+https://github.com/madebywild/agent-rules.git#main
 
-# Using SSH (if you have SSH keys configured)
-npm install git+ssh://git@github.com/madebywild/agent-rules.git#main
-
 # For global installation
 npm install -g git+https://github.com/madebywild/agent-rules.git#main
 ```
@@ -23,7 +20,6 @@ npm install -g git+https://github.com/madebywild/agent-rules.git#main
 
 - CI/CD integration examples (GitHub Actions, Docker, Jenkins)
 - Troubleshooting common issues
-- SSH setup instructions
 
 ### Quick Setup
 

@@ -8,9 +8,6 @@ This package is not published to NPM and must be installed directly from the Git
 # Using HTTPS (recommended)
 npm install git+https://github.com/madebywild/agent-rules.git#main
 
-# Using SSH (if SSH keys are configured)
-npm install git+ssh://git@github.com/madebywild/agent-rules.git#main
-
 # Global installation for CLI access
 npm install -g git+https://github.com/madebywild/agent-rules.git#main
 ```
@@ -93,34 +90,9 @@ npm install git+https://github.com/madebywild/agent-rules.git#main
 npx agent-rules --version
 ```
 
-## SSH Alternative
-
-If you prefer SSH and have your GitHub SSH keys configured:
-
-```bash
-# One-time SSH setup (if not done already)
-ssh-keygen -t ed25519 -C "your_email@example.com"
-ssh-add ~/.ssh/id_ed25519
-
-# Add public key to GitHub: Settings → SSH and GPG keys → New SSH key
-
-# Install using SSH
-npm install git+ssh://git@github.com/madebywild/agent-rules.git#main
-```
-
 ## Troubleshooting
 
 ### Common Issues
-
-**Permission Denied (SSH):**
-
-```
-npm ERR! Permission denied (publickey)
-```
-
-- Verify SSH key is added to GitHub
-- Test SSH connection: `ssh -T git@github.com`
-- Ensure SSH agent is running: `ssh-add -l`
 
 **Package Not Found:**
 

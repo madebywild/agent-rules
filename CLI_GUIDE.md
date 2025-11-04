@@ -13,8 +13,6 @@ npm install git+https://github.com/madebywild/agent-rules.git#main
 # Install globally for system-wide CLI access
 npm install -g git+https://github.com/madebywild/agent-rules.git#main
 
-# Using SSH (requires SSH key setup)
-npm install git+ssh://git@github.com/madebywild/agent-rules.git#main
 ```
 
 **📖 For detailed installation instructions, see [INSTALLATION.md](./INSTALLATION.md)**
