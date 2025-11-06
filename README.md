@@ -1,6 +1,6 @@
 # Agent Rules
 
-Translates markdown rules into AI agent-specific formats using a provider pattern. With **production-ready CLI support** for extensive customization and custom provider integration.
+Translates markdown rules into AI agent-specific formats using a provider pattern. With **production-ready CLI support** for extensive customization and custom provider integration. Created and maintained by the fine folks at [wild](https://wild.as).
 
 ## Installation
 
