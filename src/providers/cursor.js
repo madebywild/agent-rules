@@ -51,17 +51,20 @@ export class CursorProvider {
     // inherit retrieval-strategy: always
     const retrievalStrategy = yaml["retrieval-strategy"] ?? (yaml.alwaysApply ? "always" : undefined);
 
-    await fs.writeFile(
-      outFile,
-      matter.stringify(content + "\n", {
-        description: yaml.description ?? path.parse(filename).name,
-        globs: yaml.globs ?? [],
-        alwaysApply: yaml.alwaysApply ?? false,
-        ...(retrievalStrategy !== undefined && { "retrieval-strategy": retrievalStrategy }),
-        ...yaml, // preserve any other fields
-      }),
-      "utf8",
-    );
+    // Build the output frontmatter, ensuring retrieval-strategy is set last
+    const outputFrontMatter = {
+      description: yaml.description ?? path.parse(filename).name,
+      globs: yaml.globs ?? [],
+      alwaysApply: yaml.alwaysApply ?? false,
+      ...yaml, // preserve any other fields
+    };
+
+    // Apply retrieval-strategy after spreading yaml to ensure it takes precedence
+    if (retrievalStrategy !== undefined) {
+      outputFrontMatter["retrieval-strategy"] = retrievalStrategy;
+    }
+
+    await fs.writeFile(outFile, matter.stringify(content + "\n", outputFrontMatter), "utf8");
   }
 
   /**

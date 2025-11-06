@@ -3,9 +3,9 @@ description: |
   Defines how every AI prototype must be laid out in the repository.
 globs: []
 alwaysApply: true
-retrieval-strategy: always
 cursor:
   retrieval-strategy: always
+retrieval-strategy: always
 ---
 
 # Prototype Structure
