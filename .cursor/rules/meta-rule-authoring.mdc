@@ -12,9 +12,9 @@ description: |
     the translation script.
 globs: []
 alwaysApply: true
+retrieval-strategy: always
 cursor:
   retrieval-strategy: always
-retrieval-strategy: always
 ---
 
 # Meta-Rule: Authoring & Storing Agent Rules

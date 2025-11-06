@@ -47,12 +47,17 @@ export class CursorProvider {
     // provider-specific overrides live under `cursor:` in the YAML
     const yaml = { ...frontMatter, ...(frontMatter.cursor ?? {}) };
 
+    // If alwaysApply is true and retrieval-strategy is not explicitly set,
+    // inherit retrieval-strategy: always
+    const retrievalStrategy = yaml["retrieval-strategy"] ?? (yaml.alwaysApply ? "always" : undefined);
+
     await fs.writeFile(
       outFile,
       matter.stringify(content + "\n", {
         description: yaml.description ?? path.parse(filename).name,
         globs: yaml.globs ?? [],
         alwaysApply: yaml.alwaysApply ?? false,
+        ...(retrievalStrategy !== undefined && { "retrieval-strategy": retrievalStrategy }),
         ...yaml, // preserve any other fields
       }),
       "utf8",
