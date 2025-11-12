@@ -117,6 +117,7 @@ export async function getBuiltinProviders(baseOutputDir) {
   const { CopilotProvider } = await import("./providers/copilot.js");
   const { OpenAIProvider } = await import("./providers/openai.js");
   const { ReplitProvider } = await import("./providers/replit.js");
+  const { WindsurfProvider } = await import("./providers/windsurf.js");
 
   return [
     new CursorProvider(baseOutputDir),
@@ -125,6 +126,7 @@ export async function getBuiltinProviders(baseOutputDir) {
     new CopilotProvider(baseOutputDir),
     new OpenAIProvider(baseOutputDir),
     new ReplitProvider(baseOutputDir),
+    new WindsurfProvider(baseOutputDir),
   ];
 }
 

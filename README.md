@@ -113,6 +113,7 @@ This processes all `.md` files in `agent-rules/` and generates:
 
 - `.cursor/rules/*.mdc` (Cursor AI rules)
 - `.clinerules/*.md` (Cline rules)
+- `.windsurf/rules/*.md` (Windsurf rules)
 - `CLAUDE.md` (Combined reference)
 - `.github/copilot-instructions.md` (GitHub Copilot repository instructions)
 - `AGENTS.md` (OpenAI AGENTS.md format - open standard for AI agent instructions)
@@ -240,6 +241,7 @@ src/
 # Generated outputs (don't edit directly)
 .cursor/rules/        # Cursor AI format
 .clinerules/          # Cline format
+.windsurf/rules/      # Windsurf format
 CLAUDE.md             # Combined format
 .github/copilot-instructions.md  # GitHub Copilot format
 AGENTS.md             # OpenAI format
